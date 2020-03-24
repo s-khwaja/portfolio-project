@@ -2,19 +2,19 @@
 <!doctype html>
 <html lang="en">
 {% load staticfiles %}
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     
-    <title>Sami Khwaja</title>
+    <title>Sami's Blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/album/">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
+    </head>
   
     <body>
     <header>
@@ -26,52 +26,43 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'home' %}">Home </a>
+                        <a class="nav-link" href="{% url 'home' %}">Home </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% static 'Resume.pdf' %}">Resume</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'allblogs' %}">Blog</a>
+                        <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
 
+<!-- MAIN BODY
+===============================================  -->
+
 <main role="main">
 
-  <section class="jumbotron text-center">
     <div class="container">
-      <h1>Hi I'm Sami.</h1>
-      <p class="lead text-muted">Hey, my name is Sami I love to make Django websites. It's the thrill of handling the requests that people want!</p>
-        <p>
-            <a href="mailto:sami.skhwaja@gmail.com" class="btn btn-primary my-2">Email Me</a>
-        </p>
-        <img src="{% static 'sami.jpeg' %}" height="300"/>
-    </div>
-  </section>
+        <h1 class="text-center pt-3">Welcom To Sami's Blog</h1>
+        <br>
+        <br>
+        <h2>Latest Posts</h2>
+        <hr>
+        {% for blog in blogs.all %}
 
-  <div class="album py-5 bg-light">
-    <div class="container">
+        <a href="{% url 'detail' blog.id %}"><h3>{{ blog.title }}</h3></a>
+        {{ blog.pub_date_good }}
+        <br />
+        <img class="img-thumbnail" src="{{ blog.image.url }}" height=200 width=200 />
+        <br>
+        <p>{{ blog.summary }}</p>
 
-      <div class="row">
-
-        {% for jobs in jobs.all %}
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" src="{{ jobs.image.url }}" />
-            <div class="card-body">
-              <p class="card-text">{{ jobs.summary }}</p>
-            </div>
-          </div>
-        </div>
         {% endfor %}
 
-      </div>
-    </div>
-  </div>
 
+    </div>
 </main>
 
 <!-- FOOTER
